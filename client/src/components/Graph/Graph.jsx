@@ -9,8 +9,16 @@ const subjectOption ={
         thresholds: [9,13,18 ],
         colors: ['#2196f3', '#7d65ed', '#26c6da' , '#7460ee']
     },
-    math : {}, 
-    hebrew : {}
+    math : {
+        type: 'piecewise',
+        thresholds: [50],
+        colors: ['#2196f3']
+    },
+    hebrew : {
+        type: 'piecewise',
+        thresholds: [7,19],
+        colors: ['#2196f3', '#7d65ed', '#26c6da']
+    }
 }
 
 const Graph = () => {

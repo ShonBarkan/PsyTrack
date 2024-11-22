@@ -5,10 +5,7 @@ import { useAppContext } from '../../context';
 
 
 const Tests = () => {
-    const {testsScore, setTestsScore} = useAppContext()
-    const addTest = () => {
-        setTestsScore(prev => [...prev, []])
-    }
+    const {testsScore, addTest} = useAppContext()
     
     return (
         <div>
