@@ -14,8 +14,7 @@ const Tests = () => {
         <div>
             {testsScore.map((test, index)=>(
                 <TestScore length={22} testNumber={index}/>
-            )
-            )}
+            ))}
             <button onClick={addTest}>+</button>
         </div>
     );

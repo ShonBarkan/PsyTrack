@@ -5,7 +5,7 @@ const AppContext = createContext();
 
 // Create a provider component
 export const AppProvider = ({ children }) => {
-  const [testsScore, setTestsScore] = useState([[]]);
+  const [testsScore, setTestsScore] = useState([new Array(22).fill(1)]);
 
   return (
     <AppContext.Provider value={
