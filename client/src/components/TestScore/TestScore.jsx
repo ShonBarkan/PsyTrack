@@ -1,79 +1,48 @@
-import React, { useEffect } from 'react';
-import { useState, useRef } from "react";
+import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../../context';
 
+const TestScore = ({ length ,testNumber }) => {
+  const {setTestsScore} = useAppContext()
+  // Initialize state with an array of 1s based on the given length
+  const [scores, setScores] = useState(new Array(length).fill(1));
 
-const TestScore = ({length ,testNumber}) => {
-    const {setTestsScore} = useAppContext()
-    const [digits, setDigits] = useState(Array(length).fill(""));
-    const inputsRef = useRef([]);
-  
-    const handleChange = (index, value) => {
-      if (/^[vx]?$/.test(value)) { // Allow only single digit
-        const newDigits = [...digits];
-        newDigits[index] = value;
-        setDigits(newDigits);
-  
-        // Automatically focus the next input
-        if (value && index < length - 1) {
-          inputsRef.current[index + 1]?.focus();
-        }
-      }
-    };
-  
-    const handleKeyDown = (index, event) => {
-      if (event.key === "Backspace" && !digits[index] && index > 0) {
-        inputsRef.current[index - 1]?.focus();
-      }
-    };
-  
-    const handlePaste = (event) => {
-      const pasteData = event.clipboardData.getData("text").slice(0, length);
-      const newDigits = [...digits];
-      for (let i = 0; i < pasteData.length; i++) {
-        if (/^\d$/.test(pasteData[i])) {
-          newDigits[i] = pasteData[i];
-        }
-      }
-      setDigits(newDigits);
-      inputsRef.current[Math.min(pasteData.length - 1, length - 1)]?.focus();
-    };
+  // Handle click event to toggle button value
+  const handleClick = (index) => {
+    const newScores = [...scores]; // Copy the current state
+    newScores[index] = newScores[index] === 1 ? 0 : 1; // Toggle the value at the clicked index
+    setScores(newScores); // Update state with the new array
+  };
 
-    useEffect(() => {
-      setTestsScore(prev => {
-        const tempTests = prev
-        tempTests[testNumber]= digits
-        return tempTests
-      }
-    )}, [digits]);
-    return (
-      <div style={{marginTop: '10px'}}>
-        <div onPaste={handlePaste} style={{ display: "flex", gap: "10px" , alignItems:'center' }}>
-            <>Test {testNumber+1}</>  
-          {digits.map((digit, index) => (
-            <>
-                {/* <>{index}</> */}
-                <input
-                key={index}
-                type="text"
-                maxLength="1"
-                value={digit}
-                placeholder={index+1}
-                onChange={(e) => handleChange(index, e.target.value)}
-                onKeyDown={(e) => handleKeyDown(index, e)}
-                ref={(el) => (inputsRef.current[index] = el)}
-                style={{
-                    width: "40px",
-                    height: "40px",
-                    textAlign: "center",
-                    fontSize: "18px",
-                }}
-                />
-            </>
-          ))}
-        </div>
-      </div>
-    );
-}
+  // Update testsScore
+  useEffect(() => {
+    setTestsScore(prev => {
+        const tempTests = [...prev];  
+        tempTests[testNumber] = scores;  
+        return tempTests;
+    })
+  }, [scores]);
+
+  return (
+    <div style={{ display: 'flex', gap: '10px' , marginTop:'10px' }}>
+      <>Test {testNumber+1}</>  
+      {scores.map((value, index) => (
+        <button
+          key={index}
+          onClick={() => handleClick(index)}
+          style={{
+            backgroundColor: value === 1 ? 'green' : 'red',
+            color: 'white',
+            width:'35px',
+            padding: '10px',
+            border: 'none',
+            borderRadius: '5px',
+          }}
+        >
+          {index + 1}
+        </button>
+      ))}
+    </div>
+  );
+};
 
 export default TestScore;

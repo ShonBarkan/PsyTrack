@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import TestScore from './components/TestScore/TestScore';
 import Tests from './components/Tests/Tests';
 
 function App() {

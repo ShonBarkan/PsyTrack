@@ -9,13 +9,14 @@ const Tests = () => {
     const addTest = () => {
         setTestsScore(prev => [...prev, []])
     }
+    
     return (
         <div>
             {testsScore.map((test, index)=>(
                 <TestScore length={22} testNumber={index}/>
             )
             )}
-          <button onClick={addTest}>+</button>
+            <button onClick={addTest}>+</button>
         </div>
     );
 }
