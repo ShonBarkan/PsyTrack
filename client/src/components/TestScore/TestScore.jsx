@@ -30,6 +30,7 @@ const TestScore = ({ length ,testNumber }) => {
             padding: '10px',
             border: 'none',
             borderRadius: '5px',
+            cursor:'pointer'
           }}
         >
           {index + 1}

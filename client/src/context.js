@@ -55,6 +55,9 @@ export const AppProvider = ({ children }) => {
         { 
           testsScore, setTestsScore, 
           subject , setSubject,
+          englishTestsScore, setEnglishTestsScore,
+          mathTestsScore, setMathTestsScore,
+          hebrewTestsScore, setHebrewTestsScore,
           addTest
         }
     }>
