@@ -2,8 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { LineChart } from '@mui/x-charts/LineChart';
 import { useAppContext } from '../../context';
 
+
+const subjectOption ={
+    english : {
+        type: 'piecewise',
+        thresholds: [9,13,18 ],
+        colors: ['#2196f3', '#7d65ed', '#26c6da' , '#7460ee']
+    },
+    math : {}, 
+    hebrew : {}
+}
+
 const Graph = () => {
-    const {testsScore} = useAppContext()
+    const {testsScore, subject } = useAppContext()
     const [questionsAverage, setQuestionsAverage] = useState([]);
 
     useEffect(() => {
@@ -16,9 +27,17 @@ const Graph = () => {
         )
     }, [testsScore]);
     return (
-        <div>
+        <div style={{
+            backgroundColor:'#efe9f4',
+            borderRadius:'5px'
+            }}>
             <LineChart
-            xAxis={[{ data: Array.from({length: questionsAverage.length} , (_, index) => index + 1) }]}
+            xAxis=  {[
+                        { 
+                            data: Array.from({length: questionsAverage.length} , (_, index) => index + 1),
+                            colorMap: subjectOption[subject]
+                        }
+                    ]}
             series={
                         [
                             {
@@ -27,7 +46,7 @@ const Graph = () => {
                         ]
                     }
             yAxis={[{min:0}]}
-            width={500}
+            width={1000}
             height={300}
             />
         </div>
