@@ -29,10 +29,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ExportToExcel/>
-        <Radio.Group options={options} onChange={onChangeSubject} optionType="button" />
+        <Radio.Group style={{margin: "20px"}} options={options} onChange={onChangeSubject} optionType="button" />
         <Graph/>
         <Tests/>
+        <ExportToExcel/>
       </header>
     </div>
   );
