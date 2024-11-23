@@ -16,6 +16,7 @@ export const AppProvider = ({ children }) => {
   const [mathTestsScore, setMathTestsScore] = useState([new Array(20).fill(1)]);
   const [hebrewTestsScore, setHebrewTestsScore] = useState([new Array(23).fill(1)]);
   const [subject , setSubject] = useState("english")
+  const [mistakes , setMistakes] = useState({})
 
   // change testsScore when subject is changing
   useEffect(() => {
@@ -58,6 +59,7 @@ export const AppProvider = ({ children }) => {
           englishTestsScore, setEnglishTestsScore,
           mathTestsScore, setMathTestsScore,
           hebrewTestsScore, setHebrewTestsScore,
+          mistakes , setMistakes,
           addTest
         }
     }>
