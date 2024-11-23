@@ -4,6 +4,7 @@ import Tests from './components/Tests/Tests';
 import { Radio } from 'antd';
 import { useAppContext } from './context';
 import ExportToExcel from './components/ExsportToExcel/ExsportToExcel';
+import ShowMistakes from './components/ShowMistakes/ShowMistakes';
 
 const options = [
   {
@@ -30,7 +31,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Radio.Group style={{margin: "20px"}} options={options} onChange={onChangeSubject} optionType="button" />
-        <Graph/>
+        <div style={{display:'flex' , gap:20}}>
+          <Graph/>
+          <ShowMistakes/>
+        </div>
         <Tests/>
         <ExportToExcel/>
       </header>
