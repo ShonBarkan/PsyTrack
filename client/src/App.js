@@ -5,6 +5,8 @@ import { Radio } from 'antd';
 import { useAppContext } from './context';
 import ExportToExcel from './components/ExsportToExcel/ExsportToExcel';
 import ShowMistakes from './components/ShowMistakes/ShowMistakes';
+import { useEffect, useState } from 'react';
+import NoSmartPhones from './components/NoSmartPhones/NoSmartPhones';
 
 const options = [
   {
@@ -23,6 +25,23 @@ const options = [
 
 function App() {
   const {setSubject} = useAppContext()
+  const [isSmartphone, setIsSmartphone] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmartphone(window.innerWidth <= 768); // Adjust the width threshold as needed
+    };
+    // Initial check
+    checkScreenSize();
+    // Add event listener to handle resizing
+    window.addEventListener('resize', checkScreenSize);
+    // Clean up event listener
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  if (isSmartphone) {
+    return <NoSmartPhones/>;
+  }
 
   const onChangeSubject = ({ target: { value } }) => {
     setSubject(value);
