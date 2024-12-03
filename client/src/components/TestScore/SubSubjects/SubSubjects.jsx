@@ -19,7 +19,9 @@ const SubSubjects = ({subsub ,testNumber , questionNumber}) => {
         mistakes[subject]?.[`${testNumber}_${questionNumber}`] || [];
 
     return (
-        <Checkbox.Group options={subsub} onChange={onChange} defaultValue={defaultValue}/>
+        <div dir='rtl'>
+            <Checkbox.Group options={subsub} onChange={onChange} defaultValue={defaultValue}/>
+        </div>
     );
 }
 

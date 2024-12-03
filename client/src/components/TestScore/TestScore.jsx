@@ -16,7 +16,11 @@ const questionDictionary = {
     sub4:{title:"אנסין 2" ,subsub:["אוצר מילים","הבנה"]}
   },
   math:{
-    sub1:{title:"כמותי" ,subsub:["גרפים","כללי","גאומטריה","אחוזים","משולשים"]},
+    sub1:{title:"כמותי" ,subsub:[
+      "אלגברה", "השוואות", "חזקות", "שורשים", "ערך מוחלט", "כלליות", "אחוזים", "ממוצעים", 
+      "תנועה", "הספק", "צירופים", "הסתברויות", "חפיפה", "זוויות", "משולשים", "צורות", 
+      "מורכבות", "מעגלים", "מצולעים", "גופים" , "גרפים"
+    ]},
   },
 }  
 
@@ -79,30 +83,51 @@ const TestScore = ({ length ,testNumber }) => {
   }
 
   return (
-    <div style={{ display: 'flex', gap: '10px' , marginTop:'10px' }}>
-      <>Test {testNumber+1}</>  
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap', // Allows wrapping on smaller screens
+        gap: '10px',
+        marginTop: '10px',
+        justifyContent: 'center', // Centers content horizontally
+      }}
+    >
+      <>Test {testNumber + 1}</>
       {testsScore[testNumber].map((value, index) => (
-            <Popover content={<SubSubjects testNumber={testNumber+1} questionNumber={index+1} subsub={chooseSubSubjectGroup(index+1 ,"subsub")}/>} title={chooseSubSubjectGroup(index+1 ,"title")} trigger="hover" >
-              <button
-                key={index}
-                onClick={() => handleClick(index)}
-                style={{
-                  backgroundColor: value === 1 ? 'green' : 'red',
-                  color: 'white',
-                  width:'35px',
-                  padding: '10px',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor:'pointer'
-                }}
-              >
-                {index + 1}
-              </button>
-            </Popover>
-
-        ))}
+        <Popover
+          dir="rtl"
+          overlayStyle={{ maxWidth: '90%' }} // Adjusted for smaller screens
+          content={
+            <SubSubjects
+              testNumber={testNumber + 1}
+              questionNumber={index + 1}
+              subsub={chooseSubSubjectGroup(index + 1, "subsub")}
+            />
+          }
+          title={chooseSubSubjectGroup(index + 1, "title")}
+          trigger="hover"
+          key={index}
+        >
+          <button
+            onClick={() => handleClick(index)}
+            style={{
+              backgroundColor: value === 1 ? 'green' : 'red',
+              color: 'white',
+              width: '40px', // Slightly increased for better usability
+              padding: '8px', // Adjusted for consistent responsiveness
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '14px', // Ensures readability
+            }}
+          >
+            {index + 1}
+          </button>
+        </Popover>
+      ))}
     </div>
   );
+  
 };
 
 export default TestScore;
